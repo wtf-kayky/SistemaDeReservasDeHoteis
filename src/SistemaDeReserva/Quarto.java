@@ -1,13 +1,45 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+package SistemaDeReserva;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+public abstract class Quarto {
+
+    protected int numero;
+    protected double precoPorNoite;
+    protected boolean ocupado;
+
+    public Quarto(int numero,double precoPorQuarto, boolean ocupado) {
+        this.numero = numero;
+        this.precoPorNoite = precoPorQuarto;
+        this.ocupado = ocupado;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public double getPrecoPorNoite() {
+        return precoPorNoite;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public void reserva(){
+        if(ocupado){
+            throw new RuntimeException("Este quarto esta disponivel para reservas");
+        }else{
+            ocupado = true;
+            System.out.println("Reserva concluida com sucesso");
+        }
+    }
+    public void cancelarReserva(){
+        if (!ocupado){
+            throw new RuntimeException("Não foi possivel cnacelar a reserva deste quarto");
+        }else{
+            ocupado = false;
+            System.out.println("Reserva cancelada ");
+        }
+
+    }
+    public abstract double calcularValor(int quantidadesDeNoites);
 }
